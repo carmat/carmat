@@ -1,0 +1,101 @@
+/**
+ * Use this when you want to make something inline-block, it will automatically
+ * add in the IE7/8 fix.
+ * 
+ * EDIT: As 'inline-block' appends an extra margin to an element, the amended
+ * mixin fixes the mysterious margins to all immediate child elements,
+ * and keeps them in tact.
+ * 
+ * EDIT: Set the base font size at the beginning of your variables.
+ * 
+ * @usage: .base;
+ * @usage: .inline-block;
+ */
+
+.base { font-size: 16px; }
+.inline-block() {
+	font-size: 0;
+	
+	> * {
+		.base;
+		display: inline-block;
+		*display: inline;
+		zoom: 1;
+	}
+}
+
+/**
+ * Use this when you want to change the opacity of an object, it will also do the
+ * IE 8/9 fix.
+ *
+ * @usage: .opacity(0.5);
+ */
+.opacity(@opacity) {
+	@ms-opacity: @opacity * 100;
+	filter: alpha(opacity=@ms-opacity); 
+    opacity: @opacity;          
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=@{ms-opacity})";
+}
+
+/**
+ * Easily & quickly apply the 'border-box' attributes.
+ * Can also be used for 'content-box', and 'padding-box' where appropriate.
+ * 
+ * @usage: .border-box;
+ */
+.border-box {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/**
+ * Quickly apply a transition to an element
+ * Default values for duration, timing function & delay included but may be overwritten.
+ * 
+ * @usage: .transition ( color, 0.5s, ease-in, 2s );
+ * @param: @prop;	//	required
+ * @param: @dur;	//	optional
+ * @param: @timing;	//	optional
+ * @param: @delay;	//	optional
+ */
+.transition ( @prop, @dur: 0, @timing: linear, @delay: 0 ) {
+	-webkit-transition: @arguments;
+	-moz-transition: @arguments;
+	-ms-transition: @arguments;
+	-o-transition: @arguments;
+	transition: @arguments;
+}
+
+/**
+ * Quickly apply a border-radius to an element
+ * Include one, two, three or four values to be used.
+ * 
+ * @usage: .border-radius ( 8px | 0.5em | 50% );
+ * @usage: .border-radius ( 8px 4px 2px 7px );
+ * @param: @radius;	//	required
+ */
+.border-radius ( @radius ) {
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+}
+
+/**
+ * A better way to call rgba that auto includes backwards compatibility
+ * with older browsers.
+ *
+ * @usage: .rgba(255,255,255,0.5)
+ *
+ * @param: @r - red value
+ * @param: @g - green value
+ * @param: @b - blue value
+ * @param: @a - alpha value (transparency)
+ */
+
+.rgba(@r, @g, @b, @a) {
+	background-color: rgb(@r, @g, @b);
+	background-color: rgba(@r, @g, @b, @a);
+}

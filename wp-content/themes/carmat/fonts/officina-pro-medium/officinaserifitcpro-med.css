@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'OfficinaSerifITCProMedium';
+    src: url('officinaserifitcpro-med.eot');
+    src: url('officinaserifitcpro-med.eot') format('embedded-opentype'),
+         url('officinaserifitcpro-med.woff') format('woff'),
+         url('officinaserifitcpro-med.ttf') format('truetype'),
+         url('officinaserifitcpro-med.svg#OfficinaSerifITCProMedium') format('svg');
+}

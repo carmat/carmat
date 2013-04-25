@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'PolarisRegular';
+    src: url('polaris.eot');
+    src: url('polaris.eot') format('embedded-opentype'),
+         url('polaris.woff') format('woff'),
+         url('polaris.ttf') format('truetype'),
+         url('polaris.svg#PolarisRegular') format('svg');
+}

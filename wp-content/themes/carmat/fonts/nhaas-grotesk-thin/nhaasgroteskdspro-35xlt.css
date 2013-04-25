@@ -1,0 +1,8 @@
+@font-face {
+    font-family: 'NeueHaasGroteskDisplayPro35ExtraLight';
+    src: url('nhaasgroteskdspro-35xlt.eot');
+    src: url('nhaasgroteskdspro-35xlt.eot') format('embedded-opentype'),
+         url('nhaasgroteskdspro-35xlt.woff') format('woff'),
+         url('nhaasgroteskdspro-35xlt.ttf') format('truetype'),
+         url('nhaasgroteskdspro-35xlt.svg#NeueHaasGroteskDisplayPro35ExtraLight') format('svg');
+}

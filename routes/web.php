@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['uses' => 'IndexController@index', 'as' => 'home']);
+
+Route::resource('posts', 'PostsController');

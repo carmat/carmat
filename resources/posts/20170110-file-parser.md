@@ -1,3 +1,10 @@
+@title: Building the CMS
+@status: unpublished
+@description: An outline of how I've built the core workings of a Laravel-powered flat-file CMS.
+@keywords: cms, content management system, markdown cms, mark down cms, mark-down cms flat file cms, flat-file cms, flatfile cms
+@tags: cms, markdown
+-----
+
 File name format:   [date]-[url_path].md
 
 Example:            20170108-2017-roadmap.md

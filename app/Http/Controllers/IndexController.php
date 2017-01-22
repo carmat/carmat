@@ -20,7 +20,9 @@ class IndexController extends Controller
 
         foreach ($files as $post) {
             $p = new \stdClass();
-            $file = $pathToPosts . $post;
+            $file = fopen($pathToPosts . $post, "r");
+
+            // dd( file_get_contents($file) );
 
             $p->filename = $post;
             $p->title = $this->getTitleFromPost($file);
@@ -28,6 +30,8 @@ class IndexController extends Controller
             $p->desc = $this->getMetaDescriptionFromPost($file);
             $p->keywords = $this->getMetaKeywordsFromPost($file);
             $p->tags = $this->getTagsFromPost($file);
+
+            fclose( $file );
 
             array_push($posts, $p);
         }
@@ -42,24 +46,34 @@ class IndexController extends Controller
         return $files;
     }
 
-    public function getTitleFromPost( $filename ) {
-        return trim( str_replace( '@title:', '', fgets( fopen($filename, "r") ) ) );
+    public function getTitleFromPost( $post ) {
+        $data = trim( str_replace( '@title:', '', fgets( $post ) ) );
+
+        return $data;
     }
 
-    public function getStatusFromPost( $filename ) {
-        return trim( str_replace( '@status:', '', fgets( fopen($filename, "r") ) ) );
+    public function getStatusFromPost( $post ) {
+        $data = trim( str_replace( '@status:', '', fgets( $post ) ) );
+
+        return $data;
     }
 
-    public function getMetaDescriptionFromPost( $filename ) {
-        return trim( str_replace( '@description:', '', fgets( fopen($filename, "r") ) ) );
+    public function getMetaDescriptionFromPost( $post ) {
+        $data = trim( str_replace( '@description:', '', fgets( $post ) ) );
+
+        return $data;
     }
 
-    public function getMetaKeywordsFromPost( $filename ) {
-        return trim( str_replace( '@keywords:', '', fgets( fopen($filename, "r") ) ) );
+    public function getMetaKeywordsFromPost( $post ) {
+        $data = trim( str_replace( '@keywords:', '', fgets( $post ) ) );
+
+        return $data;
     }
 
-    public function getTagsFromPost( $filename ) {
-        return trim( str_replace( '@tags:', '', fgets( fopen($filename, "r") ) ) );
+    public function getTagsFromPost( $post ) {
+        $data = trim( str_replace( '@tags:', '', fgets( $post ) ) );
+
+        return $data;
     }
 
     public function parsePost( $filename ) {}

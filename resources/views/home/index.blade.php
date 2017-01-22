@@ -1,3 +1,3 @@
 @foreach ($posts as $post)
-    {{ $post->title }}
+    <p>{{ $post->title }}</p>
 @endforeach

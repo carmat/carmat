@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use \DateTime as DateTime;
+
 use Illuminate\Routing\Controller as BaseController;
 
 // use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -22,16 +24,17 @@ class IndexController extends Controller
             $p = new \stdClass();
             $file = fopen($pathToPosts . $post, "r");
 
-            // dd( file_get_contents($file) );
-
             $p->filename = $post;
+            $p->publishDate = $this->getPublishDateFromPostFilename($p->filename);
+            $p->pathName = $this->getPathNameFromPostFilename($p->filename);
+
             $p->title = $this->getTitleFromPost($file);
             $p->status = $this->getStatusFromPost($file);
             $p->desc = $this->getMetaDescriptionFromPost($file);
             $p->keywords = $this->getMetaKeywordsFromPost($file);
             $p->tags = $this->getTagsFromPost($file);
 
-            fclose( $file );
+            fclose($file);
 
             array_push($posts, $p);
         }
@@ -44,6 +47,28 @@ class IndexController extends Controller
         $files = array_diff( scandir($directory, SCANDIR_SORT_DESCENDING), array('.', '..') );
 
         return $files;
+    }
+
+    public function getPublishDateFromPostFilename( $filename ) {
+        // Begin from the start of the file name.
+        // Pull the first eight characters.
+        // i.e. yyyymmdd
+        $__extraction = substr( $filename, 0, 8 );
+
+        $date = new DateTime( $__extraction );
+        $date = $date->format( "F jS, 'y" );
+
+        return $date;
+    }
+
+    public function getPathNameFromPostFilename( $filename ) {
+        // Begin after the eight-character date and the separating hyphen.
+        // Pull the entire string, excluding the final three characters.
+        // Exlcuding the final three characters with the assumpton they
+        // will be the Markdown file extension i.e. ".md"
+        $path = substr( $filename, 9, -3 );
+
+        return $path;
     }
 
     public function getTitleFromPost( $post ) {
